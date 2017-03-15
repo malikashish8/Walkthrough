@@ -1,58 +1,42 @@
-[Quaoar](https://www.vulnhub.com/entry/hackfest2016-quaoar,180/) turned out to be one of the easiest machine I have encountered on Vulnhub. The discription of this VM says:
->Welcome to Quaoar
->
->This is a vulnerable machine i created for the Hackfest 2016 CTF http://hackfest.ca/
->
->Difficulty : Very Easy
->
->Tips:
->
->Here are the tools you can research to help you to own this machine. nmap dirb / dirbuster / BurpSmartBuster nikto wpscan hydra Your Brain Coffee Google :)
->
->Goals: This machine is intended to be doable by someone who is interested in learning computer security There are 3 flags on this machine 1. Get a shell 2. Get root access 3. There is a post exploitation flag on the box
->
->Feedback: This is my first vulnerable machine, please give me feedback on how to improve ! @ViperBlackSkull on Twitter simon.nolet@hotmail.com Special Thanks to madmantm for testing
+[Quaoar](https://www.vulnhub.com/entry/hackfest2016-quaoar,180/) turned out to be one of the easiest machine I have encountered on Vulnhub. When I run the VM, the banner reads as follows:
+	
+	Welcome to Quaoar
 
-When I run the VM, the banner reads as follows:
-```plain
-Welcome to Quaoar
+	This is a vulnerable machine i created for the Hackfest 2016 CTF
+	http://hackfest.ca/
 
-This is a vulnerable machine i created for the Hackfest 2016 CTF
-http://hackfest.ca/
+	Difficulty : Very Easy
 
-Difficulty : Very Easy
+	Tips:
 
-Tips:
-
-Here are the tools you can research to help you to own this machine.
-nmap
-dirb / dirbuster / BurpSmartBuster
-nikto
-wpscan
-hydra
-Your Brain
-Coffee
-Google :)
+	Here are the tools you can research to help you to own this machine.
+	nmap
+	dirb / dirbuster / BurpSmartBuster
+	nikto
+	wpscan
+	hydra
+	Your Brain
+	Coffee
+	Google :)
 
 
-Goals: This machine is intended to be doable by someone who is interested in learning computer security 
-There are 3 flags on this machine
-1. Get a shell
-2. Get root access
-3. There is a post exploitation flag on the box
+	Goals: This machine is intended to be doable by someone who is interested in learning computer security 
+	There are 3 flags on this machine
+	1. Get a shell
+	2. Get root access
+	3. There is a post exploitation flag on the box
 
 
 
 
-Feedback: This is my first vulnerable machine, please give me feedback on how to improve !
-@ViperBlackSkull on Twitter
-simon.nolet@hotmail.com
-Special Thanks to madmantm for testing
+	Feedback: This is my first vulnerable machine, please give me feedback on how to improve !
+	@ViperBlackSkull on Twitter
+	simon.nolet@hotmail.com
+	Special Thanks to madmantm for testing
 
-To reach Quaoar use this ip address:
-192.168.186.135
+	To reach Quaoar use this ip address:
+	192.168.186.135
 
-```
 
 Running nmap following services are found:
 
