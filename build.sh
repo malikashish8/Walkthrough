@@ -4,6 +4,6 @@ echo 'Synching Git Repo'
 git add .
 git status
 read -p 'Git commit message: ' mesg
-git commit -m '$mesg'
+git commit -m "$mesg"
 git push origin master
 
