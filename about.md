@@ -5,7 +5,7 @@ permalink: /about/
 ---
 ## Ashish Malik | OSCP | CEH
 
-I am a passionate cyber security professional who has a taste for Offense and Development and a soft corner for Folk Rock and Coffee!
+Passionate cyber security professional who has a taste for Offense and Development and a soft corner for Folk Rock and Coffee!
 
 ![me](/Walkthrough/images/me.jpg)   
 
