@@ -5,5 +5,5 @@ git add .
 git status
 read -p 'Git commit message: ' mesg
 git commit -m '$mesg'
-git push source origin master
+git push origin master
 
