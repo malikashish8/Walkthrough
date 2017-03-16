@@ -24,6 +24,8 @@ twitter_username: malikashish8
 github_username:  malikashish8
 page.comments: true
 jekyll.environment: "production"
+disqus: 
+  shortname: https-malikashish8-github-io 
 
 # Build settings
 markdown: kramdown

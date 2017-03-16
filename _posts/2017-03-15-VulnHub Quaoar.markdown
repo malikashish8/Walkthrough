@@ -147,7 +147,6 @@ define('DB_HOST', 'localhost');
 ```
 
 I login into the DB but do not find anything useful. To my surprise these credentials also work for root SSH login and we have the second flag now:
-
 ![Root login](/Walkthrough/images/quaoar_root.jpg)
 
  ```bash
