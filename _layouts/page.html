@@ -3,12 +3,11 @@
 
   {% include head.html %}
     {% include header.html %}
-    <div style="position: fixed; top:60px">
+    <div class="wrapper" style="position: fixed; top:60px">
           {% include allejo_jekyll-toc.toc.html html=content sanitize=true id="my_toc" ordered=false h_min=1 h_max=4 %}
         </div>
   <body>
       <div class="main">
-        
         <div class="maincontent">
           {{content}}
         </div>  
