@@ -46,3 +46,40 @@ img {
   max-width: 70%;
   vertical-align: middle;
 }
+
+// my custom settings here
+
+.main {
+  display: grid;
+  grid-gap: 100 px;
+  grid-template-areas: 
+      'sidebar' 'maincontent' 'maincontent';
+  padding-right: 1pc;
+ 
+}
+
+.sidebar {
+    height: 100%;
+    width: 260px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #fcfcfc;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.maincontent {
+    margin-left: 260px; /* Same as the width of the sidenav */
+    //font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+@media (max-width: 500px) {
+    .main {
+        grid-template-areas: 
+            'sidebar'
+            'maincontent';
+    }
+}
