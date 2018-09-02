@@ -68,7 +68,8 @@ SMTP
 nc to 25 port and then run
 `VRFY bob`
 
-#### DNS Zone Transfer
+DNS Zone Transfer
+
 Figure out dns server:
 `host -t ns foo.org`
 `host -t mx foo.org`
