@@ -53,7 +53,7 @@ enum4linux -a 10.11.1.5
 
 `/root/scripts/nmap-smb.sh 10.11.1.5`
 
-`nmap -p 139.445 --script=smb-check-vulns --script-args=unsafe=1 10.11.1.1`
+`nmap -p 139,445 --script=vuln 10.11.1.1`
 
 `rpcclient -U "" 10.11.1.1`
 

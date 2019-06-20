@@ -3,7 +3,7 @@ layout: post
 title: About Me
 permalink: /about/
 ---
-## Ashish Malik | OSCP | CEH
+## Ashish Malik | OSCP | CISSP | CEH
 
 Passionate cyber security professional who has a taste for Offense and Development and a soft corner for Folk Rock and Coffee!
 
