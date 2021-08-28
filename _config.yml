@@ -33,6 +33,6 @@ theme: minima
 gems:
   - jekyll-feed
 exclude:
+  - vendor
   - Gemfile
-  - backup.zip
   - Gemfile.lock
